@@ -1,0 +1,23 @@
+import numpy as np 
+import matplotlib.pyplot as plt 
+data_array = np.loadtxt("settings.txt", dtype=float)
+data_s = np.loadtxt("data.txt", dtype=int)
+data_s = data_s*3.3/255
+lenth_a = len(data_s)
+fig_data_s = plt.figure()
+x_a = list(range(0, lenth_a))
+x_a = [i/100 for i in x_a]
+
+subplot_data_array = fig_data_s.add_subplot(111)
+subplot_data_array.set_ylabel(u'Voltage, V')
+subplot_data_array.set_xlabel(u'Time,s')
+subplot_data_array.set_title('Процесс заряда и разряда конденсатора в RC-цепочке')
+line_data_array = subplot_data_array.plot(x_a, data_s, marker = '*', color = 'green', linewidth=2, label='voltage', markevery=30)
+subplot_data_array.legend()
+
+for ax in fig_data_s.axes:
+    ax.grid(True)
+subplot_data_array.text(2,2.5, 'Время заряда: 1 c')
+subplot_data_array.text(2,2, 'Время разряда: 2.8 c')
+plt.show()
+fig_data_s.savefig('/home/gr105/урок 8/fig', format = 'svg')
